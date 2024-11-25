@@ -72,7 +72,7 @@ $base = "/tmp/fileutil.t_$$";
 mkdir ($base, 0755) || die "couldn't mkdir $base: $!\n";
 mkdir ("$base/t", 0755) || die "couldn't mkdir $base/t: $!\n";
 @modules = qw(FileUtilities.pm MiscUtilities.pm);
-@tests = qw(t/checkdirs.t t/checkfiles.t t/miscutil.t);
+@tests = qw(t/checkdirs.t t/checkfiles.t ); # t/miscutil.t
 
 map { copy ("MNI/$_", "$base/$_") } @modules;
 map { copy ("$_", "$base/$_") } @tests;

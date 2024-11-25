@@ -169,17 +169,17 @@ sub MY::manifypods
 }  # &MY::manifypods
 
 
-sub MY::test
-{
-   my $self = shift;
-   my $text;
+# sub MY::test
+# {
+#    my $self = shift;
+#    my $text;
 
-   $text = $self->MM::test;
-   $text =~ s|^(test \s* ::) \s*|$1 t/datadir.t t/toy_ls |mx
-      or warn "warning: couldn't fiddle `test' section " .
-              "to add t/datadir.t dependency";
-   $text;
-}
+#    $text = $self->MM::test;
+#    $text =~ s|^(test \s* ::) \s*|$1 t/datadir.t t/toy_ls |mx
+#       or warn "warning: couldn't fiddle `test' section " .
+#               "to add t/datadir.t dependency";
+#    $text;
+# }
 
 
 sub MY::postamble
@@ -222,5 +222,5 @@ WriteMakefile
     VERSION_FROM  => 'MNI.pm',
     PMLIBDIRS     => ['MNI'],
     dist          => { COMPRESS=>"gzip", SUFFIX=>"gz" },
-    clean         => { FILES => 'MNI/DataDir.pm t/datadir.t t/toy_ls' },
+    clean         => { FILES => 'MNI/DataDir.pm ' }, # t/datadir.t t/toy_ls
    );

@@ -8,7 +8,9 @@ ENDIF(NOT MINC_TOOLKIT_BUILD)
 
 # quick and dirty hack to install mni-perllib using CMake
 # TODO: make it proper
-SET(DEFAULT_DATA_DIR "${CMAKE_INSTALL_PREFIX}/share/mni-models")
+SET(DEFAULT_DATA_DIR  "${CMAKE_INSTALL_PREFIX}/share/mni-models")
+SET(INSTALL_PERL_MODULES_PATH "${CMAKE_CURRENT_BINARY_DIR}/perl" CACHE PATH "Path to install perl modules")
+
 
 CONFIGURE_FILE(MNI/DataDir.pm.in ${CMAKE_CURRENT_BINARY_DIR}/DataDir.pm @ONLY)
 
@@ -42,7 +44,7 @@ INSTALL(FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/MNI/TagSet.pm
     ${CMAKE_CURRENT_SOURCE_DIR}/MNI/Compress.pm
   DESTINATION 
-    perl/MNI )
+    ${INSTALL_PERL_MODULES_PATH}/MNI )
 
 
 #execute_process(COMMAND 
@@ -56,4 +58,6 @@ foreach(pm  ${MNI_PERLLIB_MODULES} )
 endforeach(pm)
 
 # install generated auto
-INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/perl DESTINATION .)
+IF(NOT "${INSTALL_PERL_MODULES_PATH}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}/perl")
+  INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/perl DESTINATION ${INSTALL_PERL_MODULES_PATH})
+ENDIF()
